@@ -30,11 +30,40 @@ Edit `.env` in the project root:
 ```env
 NTFY_URL=https://ntfy.sh          # or your self-hosted ntfy URL
 NTFY_TOPIC=my-alerts              # ntfy topic name
-NTFY_AUTH=Bearer <your-token>     # optional — for protected topics
+NTFY_AUTH=<your-token>        # optional — for protected topics
 NTFY_PRIORITY=default             # default ntfy priority
 ```
 
-### 2. Start with Docker Compose
+### 2. Start with Docker
+
+**Using `docker run`:**
+
+```bash
+docker run -d \
+  --name ea-ntfy \
+  --restart unless-stopped \
+  -p 8080:8080 \
+  -e NTFY_URL=https://ntfy.sh \
+  -e NTFY_TOPIC=my-alerts \
+  -e NTFY_AUTH="<your-token>" \
+  -e NTFY_PRIORITY=default \
+  ghcr.io/snapp-incubator/ea-ntfy:latest
+```
+
+With a custom template:
+
+```bash
+docker run -d \
+  --name ea-ntfy \
+  --restart unless-stopped \
+  -p 8080:8080 \
+  -e NTFY_TOPIC=my-alerts \
+  -e TEMPLATE_PATH=/templates/custom.tmpl \
+  -v /path/to/your/templates:/templates:ro \
+  ghcr.io/snapp-incubator/ea-ntfy:latest
+```
+
+**Using Docker Compose:**
 
 ```bash
 docker compose up -d --build ea-ntfy
@@ -56,7 +85,7 @@ curl http://localhost:8080/health
 | `LISTEN_ADDR`   | `:8080`                    | TCP address the HTTP server listens on                   |
 | `NTFY_URL`      | `https://ntfy.sh`          | Base URL of the ntfy server                              |
 | `NTFY_TOPIC`    | *(required)*               | ntfy topic to publish to                                 |
-| `NTFY_AUTH`     | *(empty)*                  | Authorization header value (e.g. `Bearer <token>`)       |
+| `NTFY_AUTH`     | *(empty)*                  | Authorization header value (e.g. `<token>` or `Bearer <token>`) |
 | `NTFY_PRIORITY` | `default`                  | Fallback ntfy priority when severity is not recognized   |
 | `TEMPLATE_PATH` | `/templates/default.tmpl`  | Path to the Go text template file                        |
 | `HTTP_PROXY`    | *(empty)*                  | HTTP proxy for outbound ntfy requests                    |
