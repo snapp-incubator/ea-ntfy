@@ -85,7 +85,7 @@ curl http://localhost:8080/health
 | `LISTEN_ADDR`   | `:8080`                    | TCP address the HTTP server listens on                   |
 | `NTFY_URL`      | `https://ntfy.sh`          | Base URL of the ntfy server                              |
 | `NTFY_TOPIC`    | *(required)*               | ntfy topic to publish to                                 |
-| `NTFY_AUTH`     | *(empty)*                  | Authorization header value (e.g. `<token>` or `Bearer <token>`) |
+| `NTFY_AUTH`     | *(empty)*                  | ntfy token for authentication    |
 | `NTFY_PRIORITY` | `default`                  | Fallback ntfy priority when severity is not recognized   |
 | `TEMPLATE_PATH` | `/templates/default.tmpl`  | Path to the Go text template file                        |
 | `HTTP_PROXY`    | *(empty)*                  | HTTP proxy for outbound ntfy requests                    |
