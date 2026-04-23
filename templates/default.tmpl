@@ -1,0 +1,14 @@
+{{ $sev := .Severity }}{{ if eq $sev "critical" }}🔴{{ else if eq $sev "warning" }}🟡{{ else }}🔵{{ end }} {{ .RuleName }}
+
+━━━━━━━━━━━━━━━━━━━━━━━━
+📋 DETAILS
+━━━━━━━━━━━━━━━━━━━━━━━━
+Severity  : {{ if .Severity }}{{ .Severity | toUpper }}{{ else }}UNKNOWN{{ end }}
+Index     : {{ if .Index }}{{ .Index }}{{ else }}—{{ end }}
+Hits      : {{ if .NumHits }}{{ .NumHits }}{{ else }}—{{ end }}
+
+📝 MESSAGE
+━━━━━━━━━━━━━━━━━━━━━━━━
+{{ if .Message }}{{ .Message }}{{ else }}No message provided.{{ end }}
+━━━━━━━━━━━━━━━━━━━━━━━━
+⚡ Powered by ElastAlert2
