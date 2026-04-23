@@ -63,12 +63,6 @@ docker run -d \
   ghcr.io/snapp-incubator/ea-ntfy:latest
 ```
 
-**Using Docker Compose:**
-
-```bash
-docker compose up -d --build ea-ntfy
-```
-
 ### 3. Verify it's running
 
 ```bash
