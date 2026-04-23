@@ -16,7 +16,6 @@ ElastAlert2 ──► POST /webhook ──► ea-ntfy ──► ntfy topic ─�
 - Sets ntfy title and tags automatically from alert fields
 - Configurable via environment variables — no config files needed
 - Supports authenticated ntfy servers (self-hosted)
-- HTTP proxy support via standard `HTTP_PROXY` / `HTTPS_PROXY` env vars
 - `/health` endpoint for container health checks
 
 ---
@@ -82,9 +81,6 @@ curl http://localhost:8080/health
 | `NTFY_AUTH`     | *(empty)*                  | ntfy token for authentication    |
 | `NTFY_PRIORITY` | `default`                  | Fallback ntfy priority when severity is not recognized   |
 | `TEMPLATE_PATH` | `/templates/default.tmpl`  | Path to the Go text template file                        |
-| `HTTP_PROXY`    | *(empty)*                  | HTTP proxy for outbound ntfy requests                    |
-| `HTTPS_PROXY`   | *(empty)*                  | HTTPS proxy for outbound ntfy requests                   |
-| `NO_PROXY`      | *(empty)*                  | Comma-separated list of hosts to bypass the proxy        |
 
 ---
 
