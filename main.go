@@ -195,7 +195,11 @@ func (s *Server) sendNtfy(message string, alert TemplateData) error {
 	req.Header.Set("X-Priority", ntfyPriority(s.cfg.NtfyPriority, alert.Severity))
 	req.Header.Set("X-Tags", tags)
 	if s.cfg.NtfyAuth != "" {
-		req.Header.Set("Authorization", s.cfg.NtfyAuth)
+		auth := s.cfg.NtfyAuth
+		if !strings.Contains(auth, " ") {
+			auth = "Bearer " + auth
+		}
+		req.Header.Set("Authorization", auth)
 	}
 
 	resp, err := s.client.Do(req)
